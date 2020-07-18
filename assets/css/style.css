@@ -830,9 +830,9 @@ aside.left-panel {
   .right-panel .top-rigth {
     float: left; }
   .right-panel .breadcrumbs {
-    float: left;
+    /*float: left;*/
     margin-top: 30px;
-    padding: 0 1.875em;
+    /*padding: 0 1.875em;*/
     width: 100%; }
     .right-panel .breadcrumbs .breadcrumbs-inner {
       background-color: #fff; }
@@ -858,7 +858,8 @@ aside.left-panel {
       content: "/\00a0"; }
 
 .right-panel header.header {
-  background: #fff;
+  /*change navbar background color*/
+  background: #b00000; 
   border-bottom: 1px solid #e8e9ed;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -872,16 +873,19 @@ aside.left-panel {
   top: 0;
   z-index: 999; }
 .right-panel .navbar-brand {
-  width: 250px;
+  /*width: 250px;*/
   display: inline-block; }
 .right-panel .menutoggle {
   padding-top: 7px; }
 .right-panel .navbar-header {
+  /*change navbar background color*/
   width: 100%;
-  background-color: #fff;
+  background-color: #b00000;
   padding: 0 1.25em 0 0; }
   .right-panel .navbar-header > a {
-    display: inline-block; }
+    display: inline-block; 
+    /*change logo text color*/
+    color: white}
 .right-panel .navbar-brand {
   line-height: 42px; }
   .right-panel .navbar-brand img {
@@ -900,7 +904,7 @@ header.fixed-top {
 
 .menutoggle {
   background-color: transparent;
-  color: #99abb4 !important;
+  /*color: white !important;*/
   cursor: pointer;
   font-size: 1em;
   height: 40px;
@@ -2436,7 +2440,7 @@ footer.site-footer {
   .right-panel .top-left, .right-panel .top-right {
     width: 100%;
     float: none;
-    background: white; }
+    background: zzz; }
   .right-panel .menutoggle {
     float: right; }
   .right-panel .navbar-header {
