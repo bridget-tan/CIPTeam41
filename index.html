@@ -135,10 +135,52 @@
                 <!-- /.breadcrumbs-->
                 <div class="clearfix"></div>
                 <div class="row">
-                    <div class="col-lg-10">
+                    <!-- Dropdown -->
+                    <div class="col">
+                        <select id="dropdown"></select>
+                    </div>
+                    <!-- End Dropdown -->
+                    <!-- Input file -->
+                    <div class="col">
+                        <input type="file" id="file-input" >
+                        <div id="file-content"></div>
+                    </div>
+                    <!-- End input file -->
+                    <!-- Input Parameters -->
+                    <div class="col">
                         <button type="button" class="btn btn-primary" id="csv">Analyze</button>
                     </div>
+                    <!-- End input parameters -->
+
+
                 </div>
+                <br>
+                <div class="row">
+
+                    <!-- Start Date Input text -->
+                    <div class="col">
+                        <input type="text" id="startDate" name="text-input" placeholder="Text" class="form-control">
+                    </div>
+                    <!-- End input tex -->
+                    <!-- Input Parameters -->
+                    <div class="col">
+                        <button type="button" class="btn btn-primary" id="getStartDate">Start Date</button>
+                    </div>
+                    <!-- End input parameters -->
+
+                    <!-- End Date Input text -->
+                    <div class="col">
+                        <input type="text" id="endDate" name="text-input" placeholder="Text" class="form-control">
+                    </div>
+                    <!-- End input tex -->
+                    <!-- Input Parameters -->
+                    <div class="col">
+                        <button type="button" class="btn btn-primary" id="getEndDate">End Date</button>
+                    </div>
+                    <!-- End input parameters -->
+                    
+                </div>
+
                 <br>
                 <div class="row">
                     <div class="col-lg-10">
@@ -211,21 +253,28 @@
             var date = [];
             var time = [];
             var value = [];
+            var headers = [];
+            var lines = [];
+            var startDateInd = -1;
+            var endDateInd = -1;
 
-            function getData() {
+            // Adapted from https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
+            function getData(file) {
                 $.ajax({
                     type: "GET",
-                    url: "https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv",
+                    url: file,
                     dataType: "text",
                     success: function(data) {processData(data);}
                  });
             };
+            getData("https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv");
 
+            // Adapted from https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
             function processData(allText) {
                 var allTextLines = allText.split(/\r\n|\n/);
-                var headers = allTextLines[0].split(',');
-                var lines = [];
-
+                headers = allTextLines[0].split(',');
+                // var lines = [];
+                console.log(allTextLines.length);
                 for (var i=1; i<allTextLines.length; i++) {
                     var data = allTextLines[i].split(',');
                     if (data.length == headers.length) {
@@ -234,23 +283,35 @@
                         for (var j=0; j<headers.length; j++) {
                             tarr.push(data[j]);
                         }
+                        var lineTime = tarr[3];
+                        if (lineTime == 0.0) {
+                            lineTime = tarr[2]+"\n\n"+lineTime;
+                        }
+                        else {
+                            lineTime = tarr[2]+"\n\n"+lineTime;
+                        }
                         lines.push(tarr);
                         site.push(tarr[1])
                         date.push(tarr[2])
-                        time.push(tarr[3])
+                        time.push(lineTime)
                         value.push(tarr[4])
                     }
                 }
                 console.log(headers);
+                
+            };
+
+            function plotChart(){
+                // use slice(start,end+1) to choose what to graph
                 var myChart = new Chart( ctx, {
                 type: 'line',
                 data: {
-                    labels: time.slice(0,25),
+                    labels: time.slice(startDateInd,endDateInd+1), 
                     type: 'line',
                     defaultFontFamily: 'Montserrat',
                     datasets: [ {
                         label: "CO Value",
-                        data: value.slice(0,25),
+                        data: value.slice(startDateInd,endDateInd+1),
                         backgroundColor: 'transparent',
                         borderColor: 'rgba(220,53,69,0.75)',
                         borderWidth: 3,
@@ -290,7 +351,7 @@
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Time'
+                                labelString: 'Time (Hour)'
                             }
                                 } ],
                         yAxes: [ {
@@ -310,17 +371,158 @@
                         text: 'Normal Legend'
                     }
                 }
-            } );
-            };
+            });
+            }
 
             $("#csv").click(function() {
-                getData();
+                // getData("https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv");
+                // plotChart();
+                var $startDate = "2020-"+$("#startDate").val();
+                // console.log($startDate)
+                startDateInd = getStartDateInd(lines,$startDate);
+                // console.log(startDateInd);
+                var $endDate = "2020-"+$("#endDate").val();
+                // console.log($endDate)
+                endDateInd = getEndDateInd(lines,$endDate);
+                // console.log(endDateInd);
+                plotChart();
             });
 
             var ctx = document.getElementById( "co-chart" );
             ctx.height = 150;
+
+
+
+
+            var $dropdown = $("#dropdown");
+            // Adapted from http://researchhubs.com/post/computing/javascript/open-a-local-file-with-javascript.html
+            function readSingleFile(e) {
+                var file = e.target.files[0];
+                if (!file) {
+                    return;
+                }
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var contents = e.target.result;
+                    // Display file content
+                    populateDropdown(contents);
+                    };
+                    reader.readAsText(file);
+                }
+
+            function populateDropdown(allText) {
+                var element = document.getElementById('file-content');
+                var allTextLines = allText.split(/\r\n|\n/);
+                var lines = [];
+                var contents = [];
+
+                for (var i=0; i<allTextLines.length; i++) {
+                    var data = allTextLines[i].split(',');
+                    contents.push(data);
+                }
+                for (var j=0; j<contents.length; j++) {
+                    $dropdown.append($("<option />").text(contents[j]));
+                }
+            }
+
+            document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+
+
+
+
+            // Get row from date start
+            // Adapted from http://jsfiddle.net/gNTWk/1/
+            
+            
+            $("#getStartDate").click(function() {
+                var $startDate = "2020-"+$("#startDate").val();
+                console.log($startDate)
+                startDateInd = getStartDateInd(lines,$startDate);
+                console.log(startDateInd);
+                // var output = searchData(lines,$startDate);
+                // Dump out the results of our search
+                // for(var i=0; i<output.length; i++){
+                //     // $("div#output").append(output[i] + "<br>");
+                //     console.log(output[i])
+            // }
+            });
+            // Search function using the jQuery inArray function to match data position in array
+            function searchData(data, search){
+                // Create a temp array to store the found data
+                var tempArray = [];
+                
+                // Loop through the data to see if each array has the search term we need
+                for(var i=0; i<data.length; i++){
+                    var pos = $.inArray(search, data[i]);
+                    
+                    // Add found data to the array
+                    if(pos !== -1){
+                        tempArray.push(data[i]);
+                    }
+                }
+                
+                // Return the array of matched data
+                return tempArray;
+            }
+            // Search function to get the start date index
+            function getStartDateInd(data, search){
+                // Create a temp array to store the found data
+                var tempArray = [];
+                var found = false;
+                
+                // Loop through the data to see if each array has the search term we need
+                console.log(data.length);
+                for(var i=0; i<data.length; i++){
+                    var pos = $.inArray(search, data[i]);
+                    
+                    // Add found data to the array
+                    if(pos !== -1 && found == false){
+                        // tempArray.push(data[i]);
+                        return i
+                    }
+                }
+                
+                // Return the array of matched data
+                return tempArray;
+            }
+            $("#getEndDate").click(function() {
+                var $endDate = "2020-"+$("#endDate").val();
+                console.log($endDate)
+                endDateInd = getEndDateInd(lines,$endDate);
+                console.log(endDateInd);
+                // var output = searchData(lines,$startDate);
+                // Dump out the results of our search
+                // for(var i=0; i<output.length; i++){
+                //     // $("div#output").append(output[i] + "<br>");
+                //     console.log(output[i])
+            // }
+            });
+            // Search function to get the end date index
+            function getEndDateInd(data, search){
+                // Create a temp array to store the found data
+                var tempArray = [];
+                var found = false;
+                
+                // Loop through the data to see if each array has the search term we need
+                console.log(data.length);
+                for(var i=0; i<data.length; i++){
+                    // console.log(i);
+                    var pos = $.inArray(search, data[i]);
+                    
+                    // Add found data to the array
+                    if(pos !== -1 && found == false){
+                        // tempArray.push(data[i]);
+                        return i
+                    }
+                }
+                
+                // Return the array of matched data
+                return tempArray;
+            }
+            // End get row from date start
         });
 
     </script>
+
 </body>
 </html>
