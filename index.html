@@ -146,36 +146,43 @@
                         <div id="file-content"></div>
                     </div>
                     <!-- End input file -->
-                    <!-- Input Parameters -->
-                    <div class="col">
-                        <button type="button" class="btn btn-primary" id="csv">Analyze</button>
-                    </div>
-                    <!-- End input parameters -->
 
 
                 </div>
                 <br>
                 <div class="row">
+                    <!-- End Date Input text -->
+                    <div class="col-auto">
+                        Select Site:
+                    </div>
+                    <div class="col">
+                        <select id="siteDropdown"></select>
+                    </div>
+                    <!-- End input tex -->
+                </div>
+                <br>
+                <div class="row">
 
                     <!-- Start Date Input text -->
-                    <div class="col">
-                        <input type="text" id="startDate" name="text-input" placeholder="Text" class="form-control">
+                    <div class="col-auto">
+                        Enter start date:
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="startDate" name="text-input" placeholder="MM-DD" class="form-control">
                     </div>
                     <!-- End input tex -->
-                    <!-- Input Parameters -->
-                    <div class="col">
-                        <button type="button" class="btn btn-primary" id="getStartDate">Start Date</button>
-                    </div>
-                    <!-- End input parameters -->
 
                     <!-- End Date Input text -->
-                    <div class="col">
-                        <input type="text" id="endDate" name="text-input" placeholder="Text" class="form-control">
+                    <div class="col-auto">
+                        Enter End Date:
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="endDate" name="text-input" placeholder="MM-DD" class="form-control">
                     </div>
                     <!-- End input tex -->
                     <!-- Input Parameters -->
                     <div class="col">
-                        <button type="button" class="btn btn-primary" id="getEndDate">End Date</button>
+                        <button type="button" class="btn btn-primary" id="csv">Analyze</button>
                     </div>
                     <!-- End input parameters -->
                     
@@ -298,20 +305,21 @@
                     }
                 }
                 console.log(headers);
-                
+                getSites();
             };
 
             function plotChart(){
                 // use slice(start,end+1) to choose what to graph
-                var myChart = new Chart( ctx, {
+                myChart.destroy();
+                myChart = new Chart( ctx, {
                 type: 'line',
                 data: {
-                    labels: time.slice(startDateInd,endDateInd+1), 
+                    labels: time.slice(startDateInd,endDateInd), 
                     type: 'line',
                     defaultFontFamily: 'Montserrat',
                     datasets: [ {
                         label: "CO Value",
-                        data: value.slice(startDateInd,endDateInd+1),
+                        data: value.slice(startDateInd,endDateInd),
                         backgroundColor: 'transparent',
                         borderColor: 'rgba(220,53,69,0.75)',
                         borderWidth: 3,
@@ -375,20 +383,19 @@
             }
 
             $("#csv").click(function() {
-                // getData("https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv");
+                // // getData("https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv");
                 // plotChart();
                 var $startDate = "2020-"+$("#startDate").val();
-                // console.log($startDate)
                 startDateInd = getStartDateInd(lines,$startDate);
-                // console.log(startDateInd);
+                console.log(startDateInd);
                 var $endDate = "2020-"+$("#endDate").val();
-                // console.log($endDate)
                 endDateInd = getEndDateInd(lines,$endDate);
-                // console.log(endDateInd);
+                console.log(endDateInd);
                 plotChart();
             });
 
             var ctx = document.getElementById( "co-chart" );
+            var myChart = new Chart(ctx);
             ctx.height = 150;
 
 
@@ -405,12 +412,12 @@
                 reader.onload = function(e) {
                     var contents = e.target.result;
                     // Display file content
-                    populateDropdown(contents);
+                    populateDropdownFromCSV(contents);
                     };
                     reader.readAsText(file);
                 }
 
-            function populateDropdown(allText) {
+            function populateDropdownFromCSV(allText) {
                 var element = document.getElementById('file-content');
                 var allTextLines = allText.split(/\r\n|\n/);
                 var lines = [];
@@ -433,19 +440,6 @@
             // Get row from date start
             // Adapted from http://jsfiddle.net/gNTWk/1/
             
-            
-            $("#getStartDate").click(function() {
-                var $startDate = "2020-"+$("#startDate").val();
-                console.log($startDate)
-                startDateInd = getStartDateInd(lines,$startDate);
-                console.log(startDateInd);
-                // var output = searchData(lines,$startDate);
-                // Dump out the results of our search
-                // for(var i=0; i<output.length; i++){
-                //     // $("div#output").append(output[i] + "<br>");
-                //     console.log(output[i])
-            // }
-            });
             // Search function using the jQuery inArray function to match data position in array
             function searchData(data, search){
                 // Create a temp array to store the found data
@@ -470,13 +464,14 @@
                 var tempArray = [];
                 var found = false;
                 
+                
                 // Loop through the data to see if each array has the search term we need
-                console.log(data.length);
                 for(var i=0; i<data.length; i++){
                     var pos = $.inArray(search, data[i]);
+                    var site = data[i].indexOf($("#siteDropdown").val());
                     
                     // Add found data to the array
-                    if(pos !== -1 && found == false){
+                    if(pos !== -1 && found == false && site != -1){
                         // tempArray.push(data[i]);
                         return i
                     }
@@ -485,34 +480,23 @@
                 // Return the array of matched data
                 return tempArray;
             }
-            $("#getEndDate").click(function() {
-                var $endDate = "2020-"+$("#endDate").val();
-                console.log($endDate)
-                endDateInd = getEndDateInd(lines,$endDate);
-                console.log(endDateInd);
-                // var output = searchData(lines,$startDate);
-                // Dump out the results of our search
-                // for(var i=0; i<output.length; i++){
-                //     // $("div#output").append(output[i] + "<br>");
-                //     console.log(output[i])
-            // }
-            });
+
             // Search function to get the end date index
             function getEndDateInd(data, search){
                 // Create a temp array to store the found data
                 var tempArray = [];
                 var found = false;
                 
+                
                 // Loop through the data to see if each array has the search term we need
-                console.log(data.length);
                 for(var i=0; i<data.length; i++){
                     // console.log(i);
                     var pos = $.inArray(search, data[i]);
-                    
+                    var site = data[i].indexOf($("#siteDropdown").val());
                     // Add found data to the array
-                    if(pos !== -1 && found == false){
+                    if(pos !== -1 && site != -1){
                         // tempArray.push(data[i]);
-                        return i
+                        return i+24;
                     }
                 }
                 
@@ -520,6 +504,24 @@
                 return tempArray;
             }
             // End get row from date start
+
+            // Get available sites for dropdown
+            var $siteDropdown = $("#siteDropdown");
+            function getSites(){
+                var contents = [];
+                // Loop through the data to see if each array has the search term we need
+                for(var i=0; i<site.length; i++){
+                    if(contents.indexOf(site[i]) === -1){
+                        contents.push(site[i]);
+                    }
+                }
+                console.log(contents);
+
+                for (var j=0; j<contents.length; j++) {
+                    $siteDropdown.append($("<option />").text(contents[j]));
+                }
+            }
+            
         });
 
     </script>
