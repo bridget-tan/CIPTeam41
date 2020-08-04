@@ -365,7 +365,7 @@ p:focus {
 a, button {
   text-decoration: none;
   outline: none !important;
-  color: #878787;
+  color: #b00000;
   -webkit-transition: all 0.25s ease;
   transition: all 0.25s ease; }
 
@@ -373,6 +373,12 @@ a:hover,
 a:focus {
   text-decoration: none;
   color: #000; }
+
+a:visited, 
+a:active {
+  text-decoration: none;
+  color: #b00000;
+}
 
 h1,
 h2,
@@ -1200,7 +1206,9 @@ header .form-inline {
 
 .content {
   float: left;
-  padding: 1.875em;
+  padding-top: 1.875em;
+  padding-left: 1.875em;
+  padding-right: 1.875em;
   width: 100%; }
 
 .card {
@@ -2094,7 +2102,9 @@ header .form-inline {
 
 /* Footer */
 footer.site-footer {
-  padding: 0 1.875em; }
+  padding-top: 1.875em; 
+  padding-left: 1.875em;
+  padding-right: 1.875em;}
   footer.site-footer .footer-inner {
     color: #78909c;
     font-family: 'Open Sans';
@@ -2508,3 +2518,10 @@ footer.site-footer {
     right: 20px !important; }
 
 /*# sourceMappingURL=style.css.map */
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
