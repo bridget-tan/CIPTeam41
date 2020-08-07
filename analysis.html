@@ -1,0 +1,564 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CIP Team 41</title>
+    <meta name="description" content="CIP Team 41 Analysis">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png"> -->
+    <!-- <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png"> -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+   <style>
+    #weatherWidget .currentDesc {
+        color: #ffffff!important;
+    }
+        .traffic-chart {
+            min-height: 335px;
+        }
+        #flotPie1  {
+            height: 150px;
+        }
+        #flotPie1 td {
+            padding:3px;
+        }
+        #flotPie1 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
+        .chart-container {
+            display: table;
+            min-width: 270px ;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        #flotLine5  {
+             height: 105px;
+        }
+
+        #flotBarChart {
+            height: 150px;
+        }
+        #cellPaiChart{
+            height: 160px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html"> <i class="menu-icon ti-info-alt"></i>Overview </a>
+                    </li>
+                    <li class="active">
+                        <a href="analysis.html"> <i class="menu-icon ti-stats-up"></i>Analysis </a>
+                    </li>
+                    <li>
+                        <a href="programs.html"> <i class="menu-icon ti-files"></i>Clean Energy Programs</a>
+                    </li>
+                    <li> <a href="team.html"><i class="menu-icon ti-user"></i>
+                        Team </a> 
+                    </li><!-- /.menu-title -->
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+        <header id="header" class="header">
+            <div class="top-left">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./">CIP Team 41</a>
+                    <a class="navbar-brand hidden" href="./">CIP Team 41</a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+            <div class="top-right">
+                <div class="header-menu">
+                    <div class="header-left">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- /#header -->
+        <!-- Content -->
+        <div class="content">
+            <!-- Animated -->
+            <div class="animated fadeIn">
+                <!-- Breadcrumbs-->
+                <div class="breadcrumbs">
+                    <div class="breadcrumbs-inner">
+                        <div class="row m-0">
+                            <div class="col-sm-4">
+                                <div class="page-header float-left">
+                                    <div class="page-title">
+                                        <h1>Analysis</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="page-header float-right">
+                                    <div class="page-title">
+                                        <ol class="breadcrumb text-right">
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <!-- /.breadcrumbs-->
+                <div class="clearfix"></div>
+                <div class="row">
+                    <!-- Download file -->
+                    <div class="col-auto">
+                        <a href="https://bridget-tan.github.io/CIPTeam41/codes/US%20EPA.ipynb" download>Download Analysis Code</a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://bridget-tan.github.io/CIPTeam41/codes/epa2.py" download>Download Standalone Gui Code</a>
+                    </div>
+                    <div class="col-auto">
+                        <a href="https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv" download>Download Example CSV File</a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <!-- Dropdown -->
+                    <!-- <div class="col">
+                        <select id="dropdown"></select>
+                    </div> -->
+                    <!-- End Dropdown -->
+                    <div class="col-auto">
+                        Upload CSV File:
+                    </div>
+                    <!-- Input file -->
+                    <div class="col">
+                        <input type="file" id="file-input" >
+                        <div id="file-content"></div>
+                    </div>
+                    <!-- End input file -->
+
+
+                </div>
+                <br>
+                <div class="row">
+                    <!-- End Date Input text -->
+                    <div class="col-auto">
+                        Select Site:
+                    </div>
+                    <div class="col">
+                        <select id="siteDropdown"></select>
+                    </div>
+                    <!-- End input tex -->
+                </div>
+                <br>
+                <div class="row">
+
+                    <!-- Start Date Input text -->
+                    <div class="col-auto">
+                        Enter start date:
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="startDate" name="text-input" placeholder="MM-DD" class="form-control">
+                    </div>
+                    <!-- End input tex -->
+
+                    <!-- End Date Input text -->
+                    <div class="col-auto">
+                        Enter End Date:
+                    </div>
+                    <div class="col-3">
+                        <input type="text" id="endDate" name="text-input" placeholder="MM-DD" class="form-control">
+                    </div>
+                    <!-- End input tex -->
+                    <!-- Input Parameters -->
+                    <div class="col">
+                        <button type="button" class="btn btn-primary" id="csv">Analyze</button>
+                    </div>
+                    <!-- End input parameters -->                    
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-auto">
+                        *Invalid inputs will not plot.
+                    </div>                    
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- <h4 class="mb-3"></h4> -->
+                                <canvas id="co-chart"></canvas>
+                            </div>
+                        </div>
+                    </div><!-- /# column -->
+                </div>
+            <!-- /#add-category -->
+            </div>
+            <!-- .animated -->
+        </div>
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-inner bg-white">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Copyright &copy; 2018 Ela Admin
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        Designed by <a href="https://colorlib.com">Colorlib</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src="assets/js/init/weather-init.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="assets/js/init/fullcalendar-init.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <!--Local Stuff-->
+    <script>
+        jQuery(document).ready(function($) {
+            "use strict";
+
+            var site = [];
+            var date = [];
+            var time = [];
+            var value = [];
+            var headers = [];
+            var lines = [];
+            var startDateInd = -1;
+            var endDateInd = -1;
+
+            // Adapted from https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
+            function getData(file) {
+                $.ajax({
+                    type: "GET",
+                    url: file,
+                    dataType: "text",
+                    success: function(data) {processData(data);}
+                 });
+            };
+            // getData("https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv");
+
+            // Adapted from https://stackoverflow.com/questions/7431268/how-to-read-data-from-csv-file-using-javascript
+            function processData(allText) {
+                var allTextLines = allText.split(/\r\n|\n/);
+                headers = allTextLines[0].split(',');
+                // var lines = [];
+                console.log(allTextLines.length);
+                for (var i=1; i<allTextLines.length; i++) {
+                    var data = allTextLines[i].split(',');
+                    if (data.length == headers.length) {
+
+                        var tarr = [];
+                        for (var j=0; j<headers.length; j++) {
+                            tarr.push(data[j]);
+                        }
+                        var lineTime = tarr[3];
+                        if (lineTime == 0.0) {
+                            lineTime = tarr[2]+"\n\n"+lineTime;
+                        }
+                        else {
+                            lineTime = tarr[2]+"\n\n"+lineTime;
+                        }
+                        lines.push(tarr);
+                        site.push(tarr[1])
+                        date.push(tarr[2])
+                        time.push(lineTime)
+                        value.push(tarr[4])
+                    }
+                }
+                console.log(headers);
+                getSites();
+            };
+
+            // plot line chart from data
+            function plotChart(){
+                // use slice(start,end+1) to choose what to graph
+                myChart.destroy();
+                myChart = new Chart( ctx, {
+                type: 'line',
+                data: {
+                    labels: time.slice(startDateInd,endDateInd), 
+                    type: 'line',
+                    defaultFontFamily: 'Montserrat',
+                    datasets: [ {
+                        label: "CO Value",
+                        data: value.slice(startDateInd,endDateInd),
+                        backgroundColor: 'transparent',
+                        borderColor: 'rgba(220,53,69,0.75)',
+                        borderWidth: 3,
+                        pointStyle: 'circle',
+                        pointRadius: 5,
+                        pointBorderColor: 'transparent',
+                        pointBackgroundColor: 'rgba(220,53,69,0.75)',
+                            } ]
+                },
+                options: {
+                    responsive: true,
+
+                    tooltips: {
+                        mode: 'index',
+                        titleFontSize: 12,
+                        titleFontColor: '#000',
+                        bodyFontColor: '#000',
+                        backgroundColor: '#fff',
+                        titleFontFamily: 'Montserrat',
+                        bodyFontFamily: 'Montserrat',
+                        cornerRadius: 3,
+                        intersect: false,
+                    },
+                    legend: {
+                        display: false,
+                        labels: {
+                            usePointStyle: true,
+                            fontFamily: 'Montserrat',
+                        },
+                    },
+                    scales: {
+                        xAxes: [ {
+                            display: true,
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time (Hour)'
+                            }
+                                } ],
+                        yAxes: [ {
+                            display: true,
+                            gridLines: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
+                                } ]
+                    },
+                    title: {
+                        display: false,
+                        text: 'Normal Legend'
+                    }
+                }
+            });
+            }
+
+            $("#csv").click(function() {
+                // // getData("https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv");
+                // plotChart();
+                var $startDate = "2020-"+$("#startDate").val();
+                startDateInd = getStartDateInd(lines,$startDate);
+                console.log(startDateInd);
+                var $endDate = "2020-"+$("#endDate").val();
+                endDateInd = getEndDateInd(lines,$endDate);
+                console.log(endDateInd);
+                plotChart();
+            });
+
+            var ctx = document.getElementById( "co-chart" );
+            var myChart = new Chart(ctx);
+            ctx.height = 150;
+
+
+
+
+            // var $dropdown = $("#dropdown");
+            // Adapted from http://researchhubs.com/post/computing/javascript/open-a-local-file-with-javascript.html
+            function readSingleFile(e) {
+                var file = e.target.files[0];
+                if (!file) {
+                    return;
+                }
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var contents = e.target.result;
+                    // Display file content
+                    // populateDropdownFromCSV(contents);
+                    // console.log("i am reading");
+                    clearParameters();
+                    processData(contents);
+                };
+                reader.readAsText(file);
+            }
+
+            function populateDropdownFromCSV(allText) {
+                var element = document.getElementById('file-content');
+                var allTextLines = allText.split(/\r\n|\n/);
+                var lines = [];
+                var contents = [];
+
+                for (var i=0; i<allTextLines.length; i++) {
+                    var data = allTextLines[i].split(',');
+                    contents.push(data);
+                }
+                for (var j=0; j<contents.length; j++) {
+                    $dropdown.append($("<option />").text(contents[j]));
+                }
+            }
+
+            document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+
+
+
+
+            // Get row from date start
+            // Adapted from http://jsfiddle.net/gNTWk/1/
+            
+            // Search function using the jQuery inArray function to match data position in array
+            function searchData(data, search){
+                // Create a temp array to store the found data
+                var tempArray = [];
+                
+                // Loop through the data to see if each array has the search term we need
+                for(var i=0; i<data.length; i++){
+                    var pos = $.inArray(search, data[i]);
+                    
+                    // Add found data to the array
+                    if(pos !== -1){
+                        tempArray.push(data[i]);
+                    }
+                }
+                
+                // Return the array of matched data
+                return tempArray;
+            }
+            // Search function to get the start date index
+            function getStartDateInd(data, search){
+                // Create a temp array to store the found data
+                var tempArray = [];
+                var found = false;
+                
+                
+                // Loop through the data to see if each array has the search term we need
+                for(var i=0; i<data.length; i++){
+                    var pos = $.inArray(search, data[i]);
+                    var site = data[i].indexOf($("#siteDropdown").val());
+                    
+                    // Add found data to the array
+                    if(pos !== -1 && found == false && site != -1){
+                        // tempArray.push(data[i]);
+                        return i
+                    }
+                }
+                
+                // Return the array of matched data
+                return tempArray;
+            }
+
+            // Search function to get the end date index
+            function getEndDateInd(data, search){
+                // Create a temp array to store the found data
+                var tempArray = [];
+                var found = false;
+                
+                
+                // Loop through the data to see if each array has the search term we need
+                for(var i=0; i<data.length; i++){
+                    // console.log(i);
+                    var pos = $.inArray(search, data[i]);
+                    var site = data[i].indexOf($("#siteDropdown").val());
+                    // Add found data to the array
+                    if(pos !== -1 && site != -1){
+                        // tempArray.push(data[i]);
+                        return i+24;
+                    }
+                }
+                
+                // Return the array of matched data
+                return tempArray;
+            }
+            // End get row from date start
+
+            // Get available sites for dropdown
+            var $siteDropdown = $("#siteDropdown");
+            function getSites(){
+                console.log($siteDropdown);
+                var contents = [];
+                // Loop through the data to see if each array has the search term we need
+                for(var i=0; i<site.length; i++){
+                    if(contents.indexOf(site[i]) === -1){
+                        contents.push(site[i]);
+                    }
+                }
+                console.log(contents);
+
+                for (var j=0; j<contents.length; j++) {
+                    $siteDropdown.append($("<option />").text(contents[j]));
+                }
+            }
+
+            // clear user input parameters
+            function clearParameters(){
+                $siteDropdown.empty();
+                site = [];
+            }
+            
+        });
+
+    </script>
+
+</body>
+</html>
