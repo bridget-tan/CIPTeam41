@@ -1670,11 +1670,13 @@ header .form-inline {
   overflow: hidden; }
 
 .icon-container {
-  width: 240px;
-  padding: .7em 0;
+  width: 50px;
+  margin-top: 20px;
   float: left;
   position: relative;
-  text-align: left; }
+  text-align: left; 
+  height: 40px;
+}
 
 .icon-container [class^="ti-"],
 .icon-container [class*=" ti-"] {
@@ -2524,4 +2526,14 @@ footer.site-footer {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.bio {
+  color: black;
+  font-size: 16px;
+}
+
+.bio-photo {
+  /*max-height: 300px;
+  max-width: 300px;*/
 }
