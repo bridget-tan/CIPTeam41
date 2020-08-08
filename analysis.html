@@ -134,84 +134,126 @@
                         </div>
                     </div>
                 </div>
-                <br>
+            </div>
+        </div>
+        <div class="content">
+            <!-- Animated -->
+            <div class="animated fadeIn">
                 <!-- /.breadcrumbs-->
                 <div class="clearfix"></div>
-                <div class="row">
-                    <!-- Download file -->
-                    <div class="col-auto">
-                        <a href="https://bridget-tan.github.io/CIPTeam41/codes/US%20EPA.ipynb" download>Download Analysis Code</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="https://bridget-tan.github.io/CIPTeam41/codes/epa2.py" download>Download Standalone Gui Code</a>
-                    </div>
-                    <div class="col-auto">
-                        <a href="https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv" download>Download Example CSV File</a>
+                <!-- Instructions -->
+                <div class="breadcrumbs">
+                    <div class="breadcrumbs-inner">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div style="padding: 0px 15px">
+                                    <br>
+                                    <h5 style="text-decoration: underline; font-weight: bold;">Instructions:</h5>
+                                    <p>The interface allows you to visualize the pollutant emissions in the United States, varying in time, space and pollutant type.
+                                    The user has to:
+                                    <ol style="margin-left: 2em">
+                                        <li>Choose the state</li>
+                                        <li>Choose the county</li>
+                                        <li>Choose the data you want to visualize </li>
+                                        <li>Choose the pollutant you want to visualize</li>
+                                    </ol>
+                                    <p>The Analysis Code is a Jupyter notebook on Google Colab which you can download and run it using Anaconda. There are two ways you can visualize the data:
+                                    <ul style="margin-left: 2em">
+                                        <li>Using the website interface: The csv file downloaded from the code can be uploaded on the website and then the parameters can be varied as per your requirements.
+                                        <li>Using the GUI locally: Download the Standalone GUI code and run it using any Python compiler with the library ‘tkinter’ installed. You can also install tkinter library as:
+                                        pip install python-tk
+                                    </ul>
+                                    <p>The output will then be a visualization plot for an area with multiple collection sites. The data exported can then be used for Machine Learning and time series modeling.
+                                    <br>
+                                    <h5 style="text-decoration: underline; font-weight: bold;">Future Work:</h5>
+                                    <ol style="margin-left: 2em">
+                                        <li>Inbuilt Machine Learning modeling in the GUI (Code)</li>
+                                        <li>Developing an independent website capable of having a web based interface.</li>
+                                    </ol>
+                                    <br>
+                                    <p>Have fun plotting the pollutants!
+                                </div>
+                            </div>                    
+                        </div>
                     </div>
                 </div>
                 <br>
-                <div class="row">
-                    <!-- Dropdown -->
-                    <!-- <div class="col">
-                        <select id="dropdown"></select>
-                    </div> -->
-                    <!-- End Dropdown -->
-                    <div class="col-auto">
-                        Upload CSV File:
+                <div style="padding: 0px 15px">
+                    <div class="row">
+                        <!-- Download file -->
+                        <div class="col-auto">
+                            <a href="https://bridget-tan.github.io/CIPTeam41/codes/US%20EPA.ipynb" download>Download Analysis Code</a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="https://bridget-tan.github.io/CIPTeam41/codes/epa2.py" download>Download Standalone Gui Code</a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="https://bridget-tan.github.io/CIPTeam41/dataset/2020CO.csv" download>Download Example CSV File</a>
+                        </div>
                     </div>
-                    <!-- Input file -->
-                    <div class="col">
-                        <input type="file" id="file-input" >
-                        <div id="file-content"></div>
-                    </div>
-                    <!-- End input file -->
+                    <br>
+                    <div class="row">
+                        <!-- Dropdown -->
+                        <!-- <div class="col">
+                            <select id="dropdown"></select>
+                        </div> -->
+                        <!-- End Dropdown -->
+                        <div class="col-auto">
+                            Upload CSV File:
+                        </div>
+                        <!-- Input file -->
+                        <div class="col">
+                            <input type="file" id="file-input" >
+                            <div id="file-content"></div>
+                        </div>
+                        <!-- End input file -->
 
 
+                    </div>
+                    <br>
+                    <div class="row">
+                        <!-- End Date Input text -->
+                        <div class="col-auto">
+                            Select Site:
+                        </div>
+                        <div class="col">
+                            <select id="siteDropdown"></select>
+                        </div>
+                        <!-- End input tex -->
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <!-- Start Date Input text -->
+                        <div class="col-auto">
+                            Enter start date:
+                        </div>
+                        <div class="col-3">
+                            <input type="text" id="startDate" name="text-input" placeholder="MM-DD" class="form-control">
+                        </div>
+                        <!-- End input tex -->
+
+                        <!-- End Date Input text -->
+                        <div class="col-auto">
+                            Enter End Date:
+                        </div>
+                        <div class="col-3">
+                            <input type="text" id="endDate" name="text-input" placeholder="MM-DD" class="form-control">
+                        </div>
+                        <!-- End input tex -->
+                        <!-- Input Parameters -->
+                        <div class="col">
+                            <button type="button" class="btn btn-primary" id="csv">Analyze</button>
+                        </div>
+                        <!-- End input parameters -->                    
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-auto">
+                            *Invalid inputs will not plot.
+                        </div>                    
+                    </div>
                 </div>
-                <br>
-                <div class="row">
-                    <!-- End Date Input text -->
-                    <div class="col-auto">
-                        Select Site:
-                    </div>
-                    <div class="col">
-                        <select id="siteDropdown"></select>
-                    </div>
-                    <!-- End input tex -->
-                </div>
-                <br>
-                <div class="row">
-
-                    <!-- Start Date Input text -->
-                    <div class="col-auto">
-                        Enter start date:
-                    </div>
-                    <div class="col-3">
-                        <input type="text" id="startDate" name="text-input" placeholder="MM-DD" class="form-control">
-                    </div>
-                    <!-- End input tex -->
-
-                    <!-- End Date Input text -->
-                    <div class="col-auto">
-                        Enter End Date:
-                    </div>
-                    <div class="col-3">
-                        <input type="text" id="endDate" name="text-input" placeholder="MM-DD" class="form-control">
-                    </div>
-                    <!-- End input tex -->
-                    <!-- Input Parameters -->
-                    <div class="col">
-                        <button type="button" class="btn btn-primary" id="csv">Analyze</button>
-                    </div>
-                    <!-- End input parameters -->                    
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-auto">
-                        *Invalid inputs will not plot.
-                    </div>                    
-                </div>
-
                 <br>
                 <div class="row">
                     <div class="col-lg-12">
